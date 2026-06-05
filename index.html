@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taman Bunga Virtual</title>
+    <style>
+        /* Gaya Tampilan (CSS) */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #1a0826, #4a154b);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        p.instruksi {
+            margin-bottom: 30px;
+            color: #ffb7b2;
+        }
+
+        /* Wadah Utama Bunga */
+        .container-bunga {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .container-bunga:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animasi Kelopak Bunga Berputar */
+        @keyframes putar {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Struktur Bunga CSS */
+        .bunga {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            animation: putar 20s linear infinite;
+        }
+
+        .kelopak {
+            position: absolute;
+            background: #ff758f;
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.9;
+            box-shadow: 0 0 15px rgba(255, 117, 143, 0.6);
+        }
+
+        /* Posisi Kelopak */
+        .k1 { top: 0; left: 25px; }
+        .k2 { top: 25px; right: 0; }
+        .k3 { bottom: 0; left: 25px; }
+        .k4 { top: 25px; left: 0; }
+
+        /* Bagian Tengah Bunga */
+        .tengah {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #ffdf6d;
+            border-radius: 50%;
+            top: 30px;
+            left: 30px;
+            box-shadow: 0 0 15px rgba(255, 223, 109, 0.8);
+            z-index: 2;
+        }
+
+        /* Gaya Teks Ucapan / Kata-kata */
+        .kotak-kata {
+            margin-top: 40px;
+            min-height: 50px;
+            text-align: center;
+            max-width: 80%;
+        }
+
+        .kata-kata {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #fff;
+            text-shadow: 0 0 8px #ff758f;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        /* Kelas untuk memunculkan teks dengan animasi halus */
+        .kata-kata.muncul {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bunga Virtual untukmu 🌸</h1>
+    <p class="instruksi">Klik bunganya untuk melihat pesan rahasia...</p>
+
+    <div class="container-bunga" id="tombolBunga">
+        <div class="bunga">
+            <div class="kelopak k1"></div>
+            <div class="kelopak k2"></div>
+            <div class="kelopak k3"></div>
+            <div class="kelopak k4"></div>
+            <div class="tengah"></div>
+        </div>
+    </div>
+
+    <div class="kotak-kata">
+        <div class="kata-kata" id="teksPesan"></div>
+    </div>
+
+    <script>
+        // Logika Interaksi (JavaScript)
+        
+        // Daftar kata-kata atau ucapan yang ingin kamu tampilkan bergantian
+        const daftarPesan = [
+            "“Hai kakk Manggar.”",
+            "“Makasih udah perlakuin aku secara baik" yaa.”",
+            "“aku masih ga nyangka banget bisa deket sama kak Manggar.”",
+            "“memang ini ga seberapa,tapi ini merupakan salah satu cara aku buat berterimakasih.”",
+            "“Semoga betah" ya sama aku,btw kakk emang cantik banget makane aku suka.”"
+        ];
+
+        let indeksPesan = 0;
+        const tombolBunga = document.getElementById('tombolBunga');
+        const teksPesan = document.getElementById('teksPesan');
+
+        tombolBunga.addEventListener('click', () => {
+            // Sembunyikan teks terlebih dahulu agar bisa menganimasi teks baru
+            teksPesan.classList.remove('muncul');
+            
+            // Tunggu sebentar (durasi transisi CSS), lalu ganti teksnya
+            setTimeout(() => {
+                teksPesan.innerText = daftarPesan[indeksPesan];
+                teksPesan.classList.add('muncul');
+                
+                // Pindah ke pesan berikutnya, kalau habis balik ke awal
+                indeksPesan = (indeksPesan + 1) % daftarPesan.length;
+            }, 300);
+        });
+    </script>
+</body>
+</html>
