@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Mba Manggar</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #1a0826, #4a154b);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .instruksi {
+            color: #ffb7b2;
+            margin-bottom: 30px;
+        }
+
+        /* Tombol Bunga */
+        .bunga-btn {
+            background: none;
+            border: none;
+            font-size: 80px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bunga-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Kotak Pesan */
+        .kotak-kata {
+            margin-top: 30px;
+            min-height: 80px;
+            padding: 0 20px;
+            text-align: center;
+            max-width: 85%;
+        }
+
+        .kata-kata {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #fff;
+            text-shadow: 0 0 10px #ff758f;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bunga Virtual 🌸</h1>
+    <p class="instruksi">Ketuk bunganya untuk melihat pesan...</p>
+
+    <!-- Tombol Bunga Emoji -->
+    <button class="bunga-btn" id="tombolBunga">🌸</button>
+
+    <div class="kotak-kata">
+        <div class="kata-kata" id="teksPesan"></div>
+    </div>
+
+    <script>
+        // DAFTAR KALIMAT DARI KAMU
+        const daftarPesan = [
+            "“Hai mba Manggar 👋”",
+            "“Aku cuma mau bilang makasih udah perlakuin aku sebaik itu, makasih udah kasih aku kesempatan 🥺✨”",
+            "“Ini emang ga seberapa, tapi aku bikin ini khusus buat mba Manggar 🌸”",
+            "“Btw Panda, panda apa yang bikin betah kak? 🐼”",
+            "“Pandangin kakak wkwk 🤭❤️”"
+        ];
+
+        let indeksPesan = 0;
+        const tombolBunga = document.getElementById('tombolBunga');
+        const teksPesan = document.getElementById('teksPesan');
+
+        // Fungsi ketika bunga diketuk
+        tombolBunga.addEventListener('click', function() {
+            teksPesan.innerText = daftarPesan[indeksPesan];
+            indeksPesan = (indeksPesan + 1) % daftarPesan.length;
+        });
+    </script>
+</body>
+</html>
